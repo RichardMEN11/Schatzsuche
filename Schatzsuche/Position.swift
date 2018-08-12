@@ -54,8 +54,12 @@ struct Position: Codable, CustomStringConvertible {
     }
     
     private static func docURL(for filename: String) -> URL? {
-       
+       //sollte immer genau ein Ergebnis liefern
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         
+        if let docDir = urls.first {
+            return docDir.appendingPathComponent(filename)
+        }
         return nil
     }
 
